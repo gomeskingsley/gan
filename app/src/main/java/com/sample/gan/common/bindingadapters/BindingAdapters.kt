@@ -17,7 +17,14 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("appearances")
     fun appearances(view: TextView, appearances: List<Int>) {
-        val joinToString = appearances.joinToString(separator = " ,") { "$it" }
-        view.text = "Seasons: $joinToString"
+        val joinToString = appearances.joinToString(separator = ", ") { it.toString() }
+        view.text = "Season: $joinToString"
+    }
+
+    @JvmStatic
+    @BindingAdapter("occupations")
+    fun occupations(view: TextView, appearances: List<String>) {
+        val joinToString = appearances.joinToString(separator = ", ") { it }
+        view.text = "Occupation: $joinToString"
     }
 }

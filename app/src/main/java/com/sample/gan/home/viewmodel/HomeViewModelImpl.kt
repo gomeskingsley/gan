@@ -22,8 +22,6 @@ class HomeViewModelImpl @Inject constructor(
     private val _items = MutableLiveData<List<CharacterItem>>()
     override val items: LiveData<List<CharacterItem>> = _items
 
-    private val _isLoading = MutableLiveData(true)
-
     init {
         fetchSeriesData()
     }
@@ -33,7 +31,6 @@ class HomeViewModelImpl @Inject constructor(
             try {
                 val response = useCase()
                 _items.value = response
-                _isLoading.postValue(false)
             } catch (e: Exception) {
                 _event.value = Event.NetworkError
             }
@@ -41,6 +38,6 @@ class HomeViewModelImpl @Inject constructor(
     }
 
     override fun onItemClicked(item: CharacterItem) {
-
+        _event.value = (Event.NavigateToDetails(item))
     }
 }

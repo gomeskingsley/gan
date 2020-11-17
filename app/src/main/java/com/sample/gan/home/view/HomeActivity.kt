@@ -1,5 +1,6 @@
 package com.sample.gan.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -8,6 +9,8 @@ import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.ViewModelProvider
 import com.sample.gan.R
 import com.sample.gan.databinding.ActivityHomeBinding
+import com.sample.gan.details.view.DetailsActivity
+import com.sample.gan.details.view.INTENT_EXTRA_KEY
 import com.sample.gan.home.view.adapter.CharacterAdapter
 import com.sample.gan.home.viewmodel.HomeViewModel
 import com.sample.gan.home.viewmodel.HomeViewModel.Event
@@ -51,6 +54,11 @@ class HomeActivity : DaggerAppCompatActivity() {
         when (event) {
             Event.NetworkError -> Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT)
                 .show()
+            is Event.NavigateToDetails -> {
+                val intent = Intent(this@HomeActivity, DetailsActivity::class.java)
+                intent.putExtra(INTENT_EXTRA_KEY, event.data)
+                startActivity(intent)
+            }
         }
     }
 }

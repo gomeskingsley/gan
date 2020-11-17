@@ -7,6 +7,7 @@ import com.sample.gan.models.response.CharacterItem
 interface HomeViewModel : ItemClickCallback {
     sealed class Event {
         object NetworkError : Event()
+        data class NavigateToDetails(val data: CharacterItem) : Event()
     }
 
     val event: LiveData<Event>
