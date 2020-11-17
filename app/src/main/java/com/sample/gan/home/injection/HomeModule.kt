@@ -16,7 +16,7 @@ import retrofit2.Retrofit
 object HomeModule {
 
     @Provides
-    fun provideNewsService(retrofit: Retrofit): APIService {
+    fun provideAPIService(retrofit: Retrofit): APIService {
         return retrofit.create(APIService::class.java)
     }
 }

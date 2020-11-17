@@ -18,9 +18,9 @@ class CharacterAdapter @Inject constructor(private val callback: ItemClickCallba
     private var items: List<CharacterItem> = arrayListOf()
     private var filteredItems: List<CharacterItem> = arrayListOf()
 
-    fun setItems(newsList: List<CharacterItem>) {
-        this.items = newsList.toList()
-        filteredItems = items
+    fun setItems(items: List<CharacterItem>) {
+        this.items = items.toList()
+        filteredItems = this.items
         notifyDataSetChanged()
     }
 
