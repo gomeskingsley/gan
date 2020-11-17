@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sample.gan">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GANApplication"
         android:allowBackup="true"

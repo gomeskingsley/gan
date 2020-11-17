@@ -7,9 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.sample.gan.common.coroutines.CoroutineDispatchersProvider
 import com.sample.gan.home.domain.SeriesUseCase
 import com.sample.gan.home.viewmodel.HomeViewModel.Event
-import com.sample.gan.models.response.CharacterItemResponse
+import com.sample.gan.models.response.CharacterItem
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HomeViewModelImpl @Inject constructor(
@@ -20,19 +19,28 @@ class HomeViewModelImpl @Inject constructor(
     private val _event = MutableLiveData<Event>()
     override val event: LiveData<Event> = _event
 
-    private val _items = MutableLiveData<List<CharacterItemResponse>>()
-    override val items: LiveData<List<CharacterItemResponse>> = _items
+    private val _items = MutableLiveData<List<CharacterItem>>()
+    override val items: LiveData<List<CharacterItem>> = _items
+
+    private val _isLoading = MutableLiveData(true)
+
+    init {
+        fetchSeriesData()
+    }
 
     override fun fetchSeriesData() {
-        viewModelScope.launch(coroutineDispatcher.io) {
+        viewModelScope.launch(coroutineDispatcher.main) {
             try {
                 val response = useCase()
-                withContext(coroutineDispatcher.main) {
-                    _items.value = response
-                }
+                _items.value = response
+                _isLoading.postValue(false)
             } catch (e: Exception) {
                 _event.value = Event.NetworkError
             }
         }
+    }
+
+    override fun onItemClicked(item: CharacterItem) {
+
     }
 }
