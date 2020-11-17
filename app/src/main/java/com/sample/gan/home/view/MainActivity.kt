@@ -1,7 +1,8 @@
-package com.sample.gan
+package com.sample.gan.home.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sample.gan.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
