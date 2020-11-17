@@ -7,6 +7,5 @@ class SeriesRepository @Inject constructor(
     private val apiService: APIService,
     private val mapper: SeriesMapper
 ) {
-
     suspend fun getSeriesData() = mapper.from(apiService.getSeriesData())
 }
